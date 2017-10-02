@@ -1,7 +1,9 @@
 // Importing Node modules and initializing Express
 const express = require('express'),
       app = express(),
+      bodyParser = require('body-parser'),
       logger = require('morgan'),
+      mongoose = require('mongoose'),
       config = require('./config/main');
 
 // Start the server
@@ -18,4 +20,12 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
   res.header("Access-Control-Allow-Credentials", "true");
   next();
+});
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Database Connection
+var promise = mongoose.connect(config.database, {
+  useMongoClient: true,
 });
