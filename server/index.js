@@ -6,6 +6,8 @@ const express = require('express'),
       mongoose = require('mongoose'),
       config = require('./config/main');
 
+const router = require('./router');
+
 // Start the server
 const server = app.listen(config.port);
 console.log('Your server is running on port ' + config.port + '.');
@@ -29,3 +31,5 @@ app.use(bodyParser.json());
 var promise = mongoose.connect(config.database, {
   useMongoClient: true,
 });
+
+router(app);  
