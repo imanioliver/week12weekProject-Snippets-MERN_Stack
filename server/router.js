@@ -19,12 +19,16 @@ module.exports = function(app) {
 
   // Set auth routes as subgroup/middleware to apiRoutes
   apiRoutes.use('/auth', authRoutes);
-
+//==================================================================================================
   // Registration route
   authRoutes.post('/register', AuthenticationController.register);
 
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
+
+  //
+  //Delete route
+  authRoutes.delete('/user/:id', AuthenticationController.delete)
 
 // Set url for API group routes
   app.use('/api', apiRoutes);
